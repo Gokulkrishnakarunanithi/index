@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dhruva Maintenance Break</title>
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+   <!-- Add the favicon link -->
+   <link rel="icon" type="images/png" href="images/favicon.png">
+
+  <style>
+    body {
+      text-align: center;
+      padding: 20px;
+      font: 20px Helvetica, sans-serif;
+      color: rgb(255, 255, 255);
+      background-color: #14539a;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding-top: 150px;
+      }
+    }
+
+    h1 {
+      font-size: 50px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    .content {
+      flex: 1;
+      text-align: left;
+      padding-right: 20px;
+    }
+
+    a {
+      color: #33aaff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #74a1cc;
+      text-decoration: none;
+    }
+
+    .countdown {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    
+    .image-container {
+      flex: 1;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: auto;
+      opacity: 0.8;
+      /* height: 400px;
+      width: 550px; */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="content">
+      <h1>We'll be back soon!</h1>
+      <div>
+        <p>
+          Sorry for the inconvenience but we're performing some maintenance at
+          the moment. If you need to you can always
+          <a href="mailto:#">contact us</a>, otherwise we'll be back online
+          shortly!
+        </p>
+        <p>&mdash; <b> Team Dhruva </b></p>
+      </div>
+      <div class="countdown">
+        <p class="day"></p>
+        <p class="hour"></p>
+        <p class="minute"></p>
+        <p class="second"></p>
+      </div>
+    </div>
+    <div class="image-container">
+      <img src="images/0.png" alt="images/5.png">
+    </div>
+  </div>
+  </article>
+  <script>
+    const countDown = () => {
+      const countDuration = 4 * 60 * 60 * 1000; // 4 hours in milliseconds
+
+      const now = new Date().getTime();
+      const countEnd = now + countDuration;
+
+      const second = 1000;
+      const minute = second * 60;
+      const hour = minute * 60;
+      const day = hour * 24;
+
+      const textDay = Math.floor(countDuration / day);
+      const textHour = Math.floor((countDuration % day) / hour);
+      const textMinute = Math.floor((countDuration % hour) / minute);
+      const textSecond = Math.floor((countDuration % minute) / second);
+
+      document.querySelector(".day").innerText = textDay + " Days";
+      document.querySelector(".hour").innerText = textHour + " Hours";
+      document.querySelector(".minute").innerText = textMinute + " Minutes";
+      document.querySelector(".second").innerText = textSecond + " Seconds";
+
+      const intervalId = setInterval(() => {
+        const currentTime = new Date().getTime();
+        const remainingTime = countEnd - currentTime;
+
+        const remainingDay = Math.floor(remainingTime / day);
+        const remainingHour = Math.floor((remainingTime % day) / hour);
+        const remainingMinute = Math.floor((remainingTime % hour) / minute);
+        const remainingSecond = Math.floor((remainingTime % minute) / second);
+
+        document.querySelector(".day").innerText = remainingDay + " Days";
+        document.querySelector(".hour").innerText = remainingHour + " Hours";
+        document.querySelector(".minute").innerText = remainingMinute + " Minutes";
+        document.querySelector(".second").innerText =
+          remainingSecond + " Seconds";
+
+        if (remainingTime <= 0) {
+          clearInterval(intervalId);
+          // If you want the countdown to restart after 4 hours, uncomment the line below
+          // countDown();
+        }
+      }, 1000);
+    };
+
+    // Initial call to set the display at the page load
+    countDown();
+  </script>
+</body>
+</html>
